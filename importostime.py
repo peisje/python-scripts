@@ -1,15 +1,33 @@
 import os
 import time
+import datetime
+import csv
 
-hosts = ["8.8.8.8", "1.1.1.1", "192.168.56.1", "169.254.55.184"]
+
+
+hosts=["8.8.8.8","1.1.1.1","192.168.56.1"]
+
+with open('ping_log.csv', 'w',encoding="utf-8") as file:
+    writer=csv.writer(file)
+    writer.writerow(["TIME","Status"])
 
 while True:
-    print("kättesadavuse kontroll")
+    print("kätesadevuse kontroll")
+    now =datetime.datetime.now()
     for elem in hosts:
-        response = os.system(f"ping -n 1 {elem} > null")
+        response=os.system(f"ping -n 1 {elem}> null")
         if response == 0:
-            print(elem, "kätesadavalt")
+            result= "OK"
+            print(elem,"kättesadavalt")
         else:
-            print(elem, "ei ole kätesadavalt")
+            result= "Fail"
+            print(elem, "ei ole kättesadavalt")
+            
+          
+    with open('ping_log.csv', 'a',encoding="utf-8") as file:
+        writer=csv.writer(file)
+        writer.writerow([now,result])    
+            
         print("-"*30)
         time.sleep(5)
+  
