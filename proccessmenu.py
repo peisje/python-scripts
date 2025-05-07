@@ -3,6 +3,7 @@ import subprocess
 def menu():
     while True:
         print("\nMENU")
+        print("masafaka")
         print("1 -  (Ping)")
         print("2 -  (Tasklist)")
         print("3 - (Exit)")
